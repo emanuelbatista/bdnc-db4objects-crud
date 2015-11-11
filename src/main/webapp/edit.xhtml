@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <form action="#" jsf:id="form">
+            <div class="form-group">
+                <label jsf:for="id">ID: </label>
+                <input type="text" jsf:id="id" class="form-control" jsf:value="#{pessoaEditar.pessoa.id}"/>
+            </div>
+            <div class="form-group">
+                <label jsf:for="nome">Nome: </label>
+                <input type="text" jsf:id="nome" class="form-control" jsf:value="#{pessoaEditar.pessoa.nome}"/>
+            </div>
+            <div class="form-group">
+                <label jsf:for="idade">Idade: </label>
+                <input type="number" jsf:id="idade" class="form-control" jsf:value="#{pessoaEditar.pessoa.idade}"/>
+            </div>
+            <div class="form-group">
+                <label jsf:for="rua">Rua: </label>
+                <input type="text" jsf:id="rua" class="form-control" jsf:value="#{pessoaEditar.pessoa.endereco.rua}"/>
+            </div>
+            <div class="form-group">
+                <label jsf:for="num">Número: </label>
+                <input type="number" jsf:id="num" class="form-control" jsf:value="#{pessoaEditar.pessoa.endereco.num}"/>
+            </div>
+            <div class="form-group">
+                <label jsf:for="bairro">Bairro: </label>
+                <input type="text" jsf:id="bairro" class="form-control" jsf:value="#{pessoaEditar.pessoa.endereco.bairro}"/>
+            </div>
+            <button jsf:action="#{pessoaEditar.salvarPessoa()}">Salvar</button>
+
+        </form>
+    </h:body>
+</html>
+

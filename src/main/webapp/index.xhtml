@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <h:head>
+        <title>Gerenciar Pessoa</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <link href="/componentes/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <h1 class="text-center">Gerenciar Pessoa</h1>
+
+
+
+            <!--MODAL DE CADASTRO PESSOA-->
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg center-block" data-toggle="modal" data-target="#myModal">
+                Cadastro Pessoa
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title text-center" id="myModalLabel">Cadastro Pessoa</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="#" jsf:id="form">
+                                <div class="form-group">
+                                    <label jsf:for="id">ID: </label>
+                                    <input type="text" jsf:id="id" class="form-control" jsf:value="#{pessoaGerenciador.pessoa.id}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label jsf:for="nome">Nome: </label>
+                                    <input type="text" jsf:id="nome" class="form-control" jsf:value="#{pessoaGerenciador.pessoa.nome}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label jsf:for="idade">Idade: </label>
+                                    <input type="number" jsf:id="idade" class="form-control" jsf:value="#{pessoaGerenciador.pessoa.idade}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label jsf:for="rua">Rua: </label>
+                                    <input type="text" jsf:id="rua" class="form-control" jsf:value="#{pessoaGerenciador.pessoa.endereco.rua}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label jsf:for="num">Número: </label>
+                                    <input type="number" jsf:id="num" class="form-control" jsf:value="#{pessoaGerenciador.pessoa.endereco.num}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label jsf:for="bairro">Bairro: </label>
+                                    <input type="text" jsf:id="bairro" class="form-control" jsf:value="#{pessoaGerenciador.pessoa.endereco.bairro}"/>
+                                </div>
+                                <button jsf:action="#{pessoaGerenciador.addPessoa(pessoaGerenciador.pessoa)}">Salvar</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--MODAL DE CADASTRO PESSOA-->
+            
+            
+
+            <h:dataTable value="${pessoaGerenciador.listarPessoas()}" var="p" class="table table-striped">
+                <h:column>
+                    <f:facet name="header">Nome</f:facet>
+                        #{p.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Nome</f:facet>
+                        #{p.nome}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Idade</f:facet>
+                        #{p.idade}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rua</f:facet>
+                        #{p.endereco.rua}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Número</f:facet>
+                        #{p.endereco.num}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Bairro</f:facet>
+                        #{p.endereco.bairro}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Excluir</f:facet>
+                    <form jsf:id="form2">
+                        <button jsf:action="#{pessoaGerenciador.removerPessoa(p)}">Remover</button>
+                    </form>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Editar</f:facet>
+                    <form jsf:id="form3">
+                        <button jsf:action="#{pessoaEditar.editarPessoa(p)}" >
+                            Editar
+                        </button>
+                    </form>
+                </h:column>
+            </h:dataTable>
+
+        </div>
+        <script src="/componentes/jquery/jquery.min.js"></script>
+        <script src="/componentes/bootstrap/js/bootstrap.min.js"></script>
+    </h:body>
+</html>
+
