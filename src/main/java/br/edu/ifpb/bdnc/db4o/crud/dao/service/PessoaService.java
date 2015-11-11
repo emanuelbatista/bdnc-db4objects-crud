@@ -27,7 +27,7 @@ public class PessoaService implements Serializable {
     @Inject
     private DAO<Pessoa> repositorio;
 
-    public void salvar(Pessoa pessoa) {
+    public void salvar(Pessoa pessoa) throws EntidadeExistenteException{
         Map<String, Object> param = new HashMap<>();
         param.put("id", pessoa.getId());
         List<Pessoa> pessoas=repositorio.findParam(Pessoa.class, param);
@@ -38,7 +38,7 @@ public class PessoaService implements Serializable {
         }
     }
     
-    public void editar(Pessoa pessoa){
+    public void editar(Pessoa pessoa) throws EntidadeExistenteException{
         Map<String, Object> param = new HashMap<>();
         param.put("id", pessoa.getId());
         Pessoa pessoa1=repositorio.findParam(Pessoa.class, param).get(0);

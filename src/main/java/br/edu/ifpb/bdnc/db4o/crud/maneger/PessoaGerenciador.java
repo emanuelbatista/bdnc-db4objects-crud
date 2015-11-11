@@ -7,8 +7,10 @@ package br.edu.ifpb.bdnc.db4o.crud.maneger;
 
 import br.edu.ifpb.bdnc.db4o.crud.dao.service.PessoaService;
 import br.edu.ifpb.bdnc.db4o.crud.entity.Pessoa;
+import br.edu.ifpb.bdnc.db4o.crud.exception.EntidadeExistenteException;
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -50,10 +52,15 @@ public class PessoaGerenciador implements Serializable {
     }
 
     public void addPessoa(Pessoa pessoa) {
-        service.salvar(pessoa);
-        logout();
+        try {
+            service.salvar(pessoa);
+            logout();
+        } catch (EntidadeExistenteException e) {
+            FacesContext facesContext=FacesContext.getCurrentInstance();
+            FacesMessage message=new FacesMessage(FacesMessage.SEVERITY_ERROR, "Entidade existente", "Entidade existente");
+            facesContext.addMessage("pessoa", message);
+        }
     }
-    
 
     public void logout() {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();

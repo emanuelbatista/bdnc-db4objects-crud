@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="https://api.trello.com/1/client.js?key=b5778637bcc6a8c1b56f96ed5d296832"></script>
+        <script type="text/javascript">
+            function onAuthorizeSuccessful() {
+                var token = Trello.token();
+                window.location.replace("/auth?token=" + token);
+            }
+            function AuthenticateTrello() {
+                Trello.authorize({
+                    name: "YourApplication",
+                    type: "redirect",
+                    interactive: true,
+                    expiration: "never",
+                    persist: true,
+                    success: function () {
+                        onAuthorizeSuccessful();
+                    },
+                    scope: {write: true, read: true}
+                });
+            }
+
+
+        </script>
+    </head>
+    <body>
+         <a href="#" onclick="AuthenticateTrello()">Connect With Trello</a>
+    </body>
+</html>
