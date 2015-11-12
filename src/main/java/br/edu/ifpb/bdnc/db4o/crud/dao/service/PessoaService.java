@@ -6,10 +6,8 @@
 package br.edu.ifpb.bdnc.db4o.crud.dao.service;
 
 import br.edu.ifpb.bdnc.db4o.crud.dao.DAO;
-import br.edu.ifpb.bdnc.db4o.crud.dao.PessoaDAO;
 import br.edu.ifpb.bdnc.db4o.crud.entity.Pessoa;
 import br.edu.ifpb.bdnc.db4o.crud.exception.EntidadeExistenteException;
-import com.db4o.ObjectSet;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;

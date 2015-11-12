@@ -6,8 +6,6 @@
 package br.edu.ifpb.bdnc.db4o.crud.dao;
 
 import br.edu.ifpb.bdnc.db4o.crud.config.Db4oFactory;
-import br.edu.ifpb.bdnc.db4o.crud.entity.Pessoa;
-import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.ext.DatabaseClosedException;
