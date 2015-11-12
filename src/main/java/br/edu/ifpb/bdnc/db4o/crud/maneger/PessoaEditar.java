@@ -63,7 +63,7 @@ public class PessoaEditar {
     public void logout() {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         HttpServletRequest request = (HttpServletRequest) context.getRequest();
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(true);
         session.invalidate();
 
     }

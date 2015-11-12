@@ -5,6 +5,7 @@
  */
 package br.edu.ifpb.bdnc.db4o.crud.dao;
 
+import br.edu.ifpb.bdnc.db4o.crud.config.Db4oFactory;
 import br.edu.ifpb.bdnc.db4o.crud.entity.Pessoa;
 import com.db4o.Db4o;
 import com.db4o.ObjectContainer;
@@ -15,11 +16,10 @@ import com.db4o.ext.Db4oIOException;
 import com.db4o.query.Constraint;
 import com.db4o.query.Query;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -28,16 +28,17 @@ import org.springframework.stereotype.Repository;
  * @param <T>
  */
 @Repository
+@Scope("singleton")
 public class Dao<T> implements DAO<T> {
 
-    private final String FILE_DB = "/home/emanuel/NetBeansProjects/bdnc-db4o-example/src/main/resources/db4o";
+
 
     public Dao() {
     }
 
     @Override
-    public void save(T t) {
-        ObjectContainer db = Db4o.openFile(FILE_DB);
+    public synchronized void save(T t) {
+        ObjectContainer db = Db4oFactory.newInstance();
         try {
             db.store(t);
         } finally {
@@ -47,8 +48,8 @@ public class Dao<T> implements DAO<T> {
     }
 
     @Override
-    public List<T> findAll(Class<T> clazz) {
-        ObjectContainer db = Db4o.openFile(FILE_DB);
+    public synchronized List<T> findAll(Class<T> clazz) {
+        ObjectContainer db = Db4oFactory.newInstance();
         List<T> list = null;
         try {
             ObjectSet<T> set = db.query(clazz);
@@ -60,8 +61,8 @@ public class Dao<T> implements DAO<T> {
     }
 
     @Override
-    public List<T> findParam(Class<T> clazz, Map<String, Object> param) {
-        ObjectContainer db = Db4o.openFile(FILE_DB);
+    public synchronized List<T> findParam(Class<T> clazz, Map<String, Object> param) {
+        ObjectContainer db = Db4oFactory.newInstance();
         try {
             Query query = db.query();
             Constraint constraint = query.constrain(clazz);
@@ -78,8 +79,8 @@ public class Dao<T> implements DAO<T> {
     }
 
     @Override
-    public void delete(T t) {
-        ObjectContainer db = Db4o.openFile(FILE_DB);
+    public synchronized void delete(T t) {
+        ObjectContainer db = Db4oFactory.newInstance();
         try {
             ObjectSet<T> objectSet = db.get(t);
             T t1 = objectSet.next();
@@ -92,9 +93,9 @@ public class Dao<T> implements DAO<T> {
     }
 
     @Override
-    public void editar(T antiga, T nova) {
+    public synchronized void editar(T antiga, T nova) {
 
-        ObjectContainer db =Db4o.openFile(FILE_DB);
+        ObjectContainer db =Db4oFactory.newInstance();
         try {
            ObjectSet<T> set=db.get(antiga);
            T aux=set.next();
